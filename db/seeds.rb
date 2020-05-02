@@ -1,4 +1,6 @@
 User.destroy_all
+Recipe.destroy_all
+Ingredient.destroy_all
 
 users = [
   {first_name: 'Joel', last_name: 'Brewer', email: 'joel@brewerdigital.com'}
@@ -6,7 +8,7 @@ users = [
 
 users.each do |u|
   new_user = User.create(u)
-  new_user.password = "secretsauce"
+  new_user.password = ENV["DEFAULT_PASSWORD"]
   new_user.save
 end
 
