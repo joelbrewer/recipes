@@ -1,0 +1,57 @@
+<div>
+  <h1>Add Recipe</h1>
+  <form method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required></br>
+    <div id="ingredients">
+      <h2>Ingredients</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="ingredient1" name="ingredient1" required></br>
+      <label for="qty">Quantity:</label>
+      <input type="text" id="qty1" name="qty1" required></br>
+    </div>
+    <button>Submit</button>
+  </form>
+  <button onClick="addIngredient()">Add Ingredient</button>
+</div>
+
+<style>
+input { padding-left: 5px; }
+label { width: 30px; }
+#ingredients {}
+</style>
+
+<script>
+  let numIngredients = 1;
+  function addIngredient() {
+    numIngredients += 1;
+
+    const form = document.getElementById("ingredients");
+
+    let recipeIndex = "ingredient" + numIngredients;
+    let qtyIndex = "qty" + numIngredients;
+
+    let input = document.createElement("input");
+    let label = document.createElement("label");
+
+    let qtyInput = document.createElement("input");
+    let qtyLabel = document.createElement("label");
+
+    label.id, input.id = recipeIndex;
+    input.setAttribute('name', recipeIndex);
+
+    qtyLabel.id, qtyInput.id = qtyIndex;
+    qtyInput.setAttribute('name', qtyIndex);
+
+    label.innerHTML = "Name:";
+    qtyLabel.innerHTML = "Quantity:";
+
+    form.appendChild(label);
+    form.appendChild(input);
+    form.appendChild(document.createElement("br"));
+
+    form.appendChild(qtyLabel);
+    form.appendChild(qtyInput);
+    form.appendChild(document.createElement("br"));
+  }
+</script>
