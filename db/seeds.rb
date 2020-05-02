@@ -5,7 +5,9 @@ users = [
 ]
 
 users.each do |u|
-  User.create(u)
+  new_user = User.create(u)
+  new_user.password = "secretsauce"
+  new_user.save
 end
 
 recipes = [
