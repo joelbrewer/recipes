@@ -64,10 +64,12 @@ class App < Sinatra::Base
   post '/recipes/new', auth: :user do
     name = params[:name]
     ingredients = params[:ingredients]
+    instructions = params[:instructions]
 
     r = Recipe.create(
       name: name,
       user_id: @user.id,
+      instructions: instructions
     )
 
     ingredients.each do |i|

@@ -6,9 +6,7 @@
 <% end %>
 </ul>
 
-<h2>Instructions</h2>
-<ul>
-<% @recipe.instructions.each do |i| %>
-  <li>(<%= i.order %>) <%= i.text %> </li>
-<% end %>
-</ul>
+<h2 style="margin-bottom: 0;">Instructions</h2>
+<div style="white-space: pre-line;">
+  <%= @recipe.instructions %>
+</div>

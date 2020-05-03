@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_204148) do
+ActiveRecord::Schema.define(version: 2020_05_03_185726) do
 
 # Could not dump table "ingredients" because of following StandardError
 #   Unknown type 'real' for column 'quantity'
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_02_204148) do
     t.integer "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text "instructions"
   end
 
   create_table "users", force: :cascade do |t|
