@@ -1,3 +1,4 @@
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <div>
   <h1>Add Recipe</h1>
   <form method="post">
@@ -5,53 +6,68 @@
     <input type="text" id="name" name="name" required></br>
     <div id="ingredients">
       <h2>Ingredients</h2>
-      <label for="name">Name:</label>
-      <input type="text" id="ingredient1" name="ingredient1" required></br>
-      <label for="qty">Quantity:</label>
-      <input type="text" id="qty1" name="qty1" required></br>
+      <div class="ingredient-group">
+        <input placeholder="1" type="text" name="ingredients[]qty" required>
+        <select name="ingredients[]unit">
+          <option value="Cup">Cup</option>
+          <option value="Pound">Pound</option>
+        </select>
+        <input class="ml" type="text" placeholder="tomatoes" name="ingredients[]name" required></br>
+      </div>
+    </div>
+    <button onClick="addIngredient(event)">Add another ingredient</button>
+    <div id="instructions">
+      <textarea id ="instructions-textarea" rows="50" cols="50">
+      </textarea>
     </div>
     <button>Submit</button>
   </form>
-  <button onClick="addIngredient()">Add Ingredient</button>
 </div>
 
 <style>
-input { padding-left: 5px; }
-label { width: 30px; }
-#ingredients {}
+.ingredient-group { display: flex; margin-bottom: 10px; }
+.ingredient-group input:nth-child(1) { width: 30px; }
+.ingredient-group input:nth-child(3) { margin-left: 10px }
+.ingredient-group select { margin-left: 10px; }
 </style>
 
+<script src="https://cdn.quilljs.com/1.3.6/quill.js">
+</script>
 <script>
   let numIngredients = 1;
-  function addIngredient() {
+  const units = ["Cup", "Pound"];
+
+  function addIngredient(event) {
+    event.preventDefault();
     numIngredients += 1;
+    const container = document.createElement("div");
+    const parentIngredientsContaienr = document.getElementById("ingredients");
+    parentIngredientsContaienr.appendChild(container);
+    container.setAttribute("class", "ingredient-group");
 
-    const form = document.getElementById("ingredients");
+    const qtyInput = document.createElement("input");
+    qtyInput.setAttribute("name", "ingredients[]qty");
+    qtyInput.setAttribute("placeholder", "1");
+    container.appendChild(qtyInput);
 
-    let recipeIndex = "ingredient" + numIngredients;
-    let qtyIndex = "qty" + numIngredients;
+    const unitInput = document.createElement("select");
+    unitInput.setAttribute("name", "ingredients[]unit");
+    container.appendChild(unitInput);
 
-    let input = document.createElement("input");
-    let label = document.createElement("label");
+    for(let i =0; i<units.length; i++) {
+      let unitText = units[i];
+      let option = document.createElement("option");
+      option.setAttribute("value", unitText);
+      option.innerHTML = unitText;
+      unitInput.appendChild(option);
+    }
 
-    let qtyInput = document.createElement("input");
-    let qtyLabel = document.createElement("label");
+    const nameInput = document.createElement("input");
+    nameInput.setAttribute("name", "ingredients[]name");
+    nameInput.setAttribute("placeholder", "carrots");
+    container.appendChild(nameInput);
+  }
 
-    label.id, input.id = recipeIndex;
-    input.setAttribute('name', recipeIndex);
-
-    qtyLabel.id, qtyInput.id = qtyIndex;
-    qtyInput.setAttribute('name', qtyIndex);
-
-    label.innerHTML = "Name:";
-    qtyLabel.innerHTML = "Quantity:";
-
-    form.appendChild(label);
-    form.appendChild(input);
-    form.appendChild(document.createElement("br"));
-
-    form.appendChild(qtyLabel);
-    form.appendChild(qtyInput);
-    form.appendChild(document.createElement("br"));
+  function appendInput(nameText, container) {
   }
 </script>

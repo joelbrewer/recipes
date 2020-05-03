@@ -63,18 +63,20 @@ class App < Sinatra::Base
 
   post '/recipes/new', auth: :user do
     name = params[:name]
-    params.delete(:name)
+    ingredients = params[:ingredients]
 
-    r = Recipe.create(name: name)
+    r = Recipe.create(
+      name: name,
+      user_id: @user.id,
+    )
 
-    num_ingredients = params.count / 2
-    num_ingredients.times do |i|
-      Ingredient.create(
-        quantity: params["qty#{i+1}"],
-        recipe_id: r.id,
-        name: params["ingredient#{i+1}"]
+    ingredients.each do |i|
+      r.ingredients.create(
+        quantity: i[:qty],
+        name: i[:name]
       )
     end
+
     redirect "/recipes/#{r.id}"
   end
 
@@ -83,5 +85,5 @@ class App < Sinatra::Base
     erb :"recipes/show"
   end
 
-  run!
+  run! if __FILE__ == $0
 end

@@ -2,6 +2,7 @@ require 'bcrypt'
 class Recipe < ActiveRecord::Base
   belongs_to :user
   has_many :ingredients
+  has_many :instructions
 end
 
 class User < ActiveRecord::Base
@@ -19,5 +20,9 @@ class User < ActiveRecord::Base
 end
 
 class Ingredient < ActiveRecord::Base
+  belongs_to :recipe
+end
+
+class Instruction < ActiveRecord::Base
   belongs_to :recipe
 end

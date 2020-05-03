@@ -2,6 +2,13 @@
 <h2>Ingredients</h2>
 <ul>
 <% @recipe.ingredients.each do |i| %>
-  <li><%= i.name %> (<%= i.quantity %>)</li>
+  <li><%= i.name %> (<%= i.quantity %> <%= i.unit %>)</li>
+<% end %>
+</ul>
+
+<h2>Instructions</h2>
+<ul>
+<% @recipe.instructions.each do |i| %>
+  <li>(<%= i.order %>) <%= i.text %> </li>
 <% end %>
 </ul>
