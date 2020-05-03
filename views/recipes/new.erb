@@ -15,7 +15,7 @@
         <input class="ml" type="text" placeholder="tomatoes" name="ingredients[]name" required></br>
       </div>
     </div>
-    <button onClick="addIngredient(event)">Add another ingredient</button>
+    <button onClick="addIngredientInput(event)">Add another ingredient</button>
     <div id="instructions">
       <textarea id ="instructions-textarea" rows="50" cols="50">
       </textarea>
@@ -28,6 +28,7 @@
 .ingredient-group { display: flex; margin-bottom: 10px; }
 .ingredient-group input:nth-child(1) { width: 30px; }
 .ingredient-group input:nth-child(3) { margin-left: 10px }
+.ingredient-group button { margin-left: 10px }
 .ingredient-group select { margin-left: 10px; }
 </style>
 
@@ -37,10 +38,16 @@
   let numIngredients = 1;
   const units = ["Cup", "Pound"];
 
-  function addIngredient(event) {
+  removeElmement = (id) => {
+    let element = document.getElementById(id);
+    element.parentNode.removeChild(id);
+  }
+
+  function addIngredientInput(event) {
     event.preventDefault();
     numIngredients += 1;
     const container = document.createElement("div");
+    container.setAttribute("id", `ingredient-group-${numIngredients}`);
     const parentIngredientsContaienr = document.getElementById("ingredients");
     parentIngredientsContaienr.appendChild(container);
     container.setAttribute("class", "ingredient-group");
@@ -66,8 +73,14 @@
     nameInput.setAttribute("name", "ingredients[]name");
     nameInput.setAttribute("placeholder", "carrots");
     container.appendChild(nameInput);
+
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = "Remove";
+    removeButton.addEventListener("click", event => {
+      event.preventDefault();
+      removeElement(`ingredient-group-${numIngredients}"`);
+    });
+    container.appendChild(removeButton);
   }
 
-  function appendInput(nameText, container) {
-  }
 </script>
