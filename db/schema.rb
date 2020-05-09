@@ -10,17 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_185726) do
+ActiveRecord::Schema.define(version: 2020_05_03_190621) do
 
-# Could not dump table "ingredients" because of following StandardError
-#   Unknown type 'real' for column 'quantity'
-
-  create_table "instructions", force: :cascade do |t|
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
     t.integer "recipe_id"
-    t.text "text"
-    t.integer "order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -29,12 +23,12 @@ ActiveRecord::Schema.define(version: 2020_05_03_185726) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "instructions"
+    t.integer "serving_number"
+    t.string "total_time"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "first_name"
-    t.string "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "password_hash"

@@ -20,6 +20,11 @@ class App < Sinatra::Base
     def is_user?
       @user != nil
     end
+
+    def is_owner?
+      @recipe = Recipe.find(params[:id])
+      (@user != nil) && (@user.id == @recipe.user_id)
+    end
   end
 
   before do
@@ -57,28 +62,28 @@ class App < Sinatra::Base
     redirect "/"
   end
 
+  get '/recipes/:id/edit', auth: :owner do
+    erb :"recipes/edit"
+  end
+
+  post '/recipes/:id/edit', auth: :owner do
+    params[:user_id] = @user.id
+    ingredients = params[:ingredients]
+    params.delete(:ingredients)
+    @recipe.update(params)
+    @recipe.ingredients.destroy_all
+    ingredients.each { |i| @recipe.ingredients.create( name: i[:name]) }
+    redirect "/recipes/#{@recipe.id}"
+  end
+
   get '/recipes/new', auth: :user do
     erb :"recipes/new"
   end
 
   post '/recipes/new', auth: :user do
-    name = params[:name]
-    ingredients = params[:ingredients]
-    instructions = params[:instructions]
-
-    r = Recipe.create(
-      name: name,
-      user_id: @user.id,
-      instructions: instructions
-    )
-
-    ingredients.each do |i|
-      r.ingredients.create(
-        quantity: i[:qty],
-        name: i[:name]
-      )
-    end
-
+    params[:user_id] = @user.id
+    r = Recipe.create(params)
+    ingredients.each { |i| r.ingredients.create( name: i[:name]) }
     redirect "/recipes/#{r.id}"
   end
 
@@ -86,6 +91,4 @@ class App < Sinatra::Base
     @recipe = Recipe.find(params[:id])
     erb :"recipes/show"
   end
-
-  run! if __FILE__ == $0
 end

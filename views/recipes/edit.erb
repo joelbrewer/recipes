@@ -1,24 +1,26 @@
+<h1><%= @recipe.name %></h1>
 <div>
-  <h1>New Recipe</h1>
   <form id="recipe-form" method="post">
     <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required></br>
-    <label for="serves">Serves:</label>
-    <input type="text" placeholder="10" id="serves" name="serving_number" required></br>
-    <label for="time">Total time:</label>
-    <input type="text" id="time" name="total_time"></br>
+    <input type="text" id="name" value="<%= @recipe.name %>" name="name" required></br>
+    <label for="serving_number">Serves:</label>
+    <input value="<%= @recipe.serving_number %>" type="text" placeholder="10" id="serves" name="serving_number" required></br>
+    <label for="total_time">Total time:</label>
+    <input value="<%= @recipe.total_time %>" type="text" id="total_time" name="total_time"></br>
     <div id="ingredients">
       <h2>Ingredients</h2>
-      <div class="ingredient-group">
-        <input placeholder="1 cup tomatoes" type="text" name="ingredients[]name" required>
-      </div>
+      <% @recipe.ingredients.each_with_index do |ingredient, i| %>
+        <div id="ingredient-group-<%=i+1%>" class="ingredient-group">
+          <input value="<%= ingredient.name%>" type="text" name="ingredients[]name">
+        </div>
+      <% end %>
     </div>
     <button id="add-ingredient-button">Add another ingredient</button>
     <div id="instructions-group">
       <h2>Instructions</h2>
-      <textarea form="recipe-form" name="instructions" id ="instructions-textarea"></textarea>
+      <textarea form="recipe-form" name="instructions" id ="instructions-textarea"><%= @recipe.instructions %></textarea>
     </div>
-    <button>Add Recipe</button>
+    <button>Update Recipe</button>
   </form>
 </div>
 
@@ -40,7 +42,9 @@ form button { margin-top: 10px; }
 </script>
 <script>
   (function() {
-    let numIngredients = 1;
+
+    let numIngredients = <%= @recipe.ingredients.count %>;
+
     const run = () => {
       setHandlers();
     }
@@ -51,6 +55,17 @@ form button { margin-top: 10px; }
           event.preventDefault();
           addIngredientInput();
         });
+
+      for(let i=numIngredients; i>1; i--) {
+        let container = document.getElementById(`ingredient-group-${i}`);
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        removeButton.addEventListener("click", event => {
+          event.preventDefault();
+          removeIngredient(`ingredient-group-${i}`);
+        });
+        container.appendChild(removeButton);
+      }
     }
 
     const removeIngredient = id => {

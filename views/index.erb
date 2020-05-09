@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Recipes</title>
-  </head>
-  <body>
-    <h1>Recipes</h1>
-    <ul>
-      <% @recipes.each do |r| %>
-        <a href="/recipes/<%= r.id %>">
-          <li><%= r.name %></li>
-        </a>
-      <% end %>
-    </ul>
-  </body>
-</html>
+<h1>Recipes</h1>
+<a href="/recipes/new">Add Recipe</a>
+<ul>
+  <% @recipes.each do |r| %>
+    <a href="/recipes/<%= r.id %>">
+      <li><%= r.name %></li>
+    </a>
+  <% end %>
+</ul>

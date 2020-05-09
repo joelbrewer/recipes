@@ -1,44 +1,40 @@
 User.destroy_all
 Recipe.destroy_all
 Ingredient.destroy_all
-Instruction.destroy_all
 
-users = [
-  {first_name: 'Joel', last_name: 'Brewer', email: 'joel@brewerdigital.com'}
-]
+users = ['joel@brewerdigital.com', 'tanyabrewer01@gmail.com']
 
 users.each do |u|
-  new_user = User.create(u)
+  new_user = User.create(email: u)
   new_user.password = ENV["DEFAULT_PASSWORD"]
   new_user.save
 end
 
 recipes = [
-  {name: 'Chicken Parm', user_id: User.first.id}
+  {
+    name: 'Chicken Parm',
+    user_id: User.first.id,
+    serving_number: 5,
+    total_time: '3 days',
+  }
 ]
 
 recipes.each do |r|
   Recipe.create(r)
 end
 
-rid = Recipe.first.id
+r = Recipe.first
+rid = r.id
 
 ingredients = [
-  { name: "chicken", quantity: "1", unit: "pound", recipe_id: rid },
-  { name: "flour", quantity: "1", unit: "cup", recipe_id: rid },
-  { name: "milk", quantity: ".5", unit: "cup", recipe_id: rid }
-]
-
-instructions = [
-  { text: "Make sauce", order: 1, recipe_id: Recipe.first.id },
-  { text: "Prepare chicken", order: 2, recipe_id: Recipe.first.id },
-  { text: "Bake chicken", order: 3, recipe_id: Recipe.first.id }
+  { name: '10 pounds of chicken', recipe_id: rid },
+  { name: '4 pounds of flour', recipe_id: rid },
+  { name: '1 cow of milk', recipe_id: rid }
 ]
 
 ingredients.each do |i|
   Ingredient.create(i)
 end
 
-instructions.each do |i|
-  Instruction.create(i)
-end
+r.instructions = 'Mix chicken, flour, and milk. Bake for two days.'
+r.save
