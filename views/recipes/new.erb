@@ -1,43 +1,29 @@
 <div>
   <h1>New Recipe</h1>
   <form id="recipe-form" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required></br>
-    <label for="serves">Serves:</label>
-    <input type="text" placeholder="10" id="serves" name="serving_number" required></br>
-    <label for="time">Total time:</label>
-    <input type="text" id="time" name="total_time"></br>
+    <div class="recipe-metadata">
+      <label for="name">Name</label>
+      <input type="text" placeholder="Grandma's Chocolate Cake" id="name" name="name" required></br>
+      <label for="serves">Serves</label>
+      <input type="text" placeholder="10" id="serves" name="serving_number" required></br>
+      <label for="time">Total time</label>
+      <input type="text" placeholder="Two days" id="time" name="total_time"></br>
+    </div>
     <div id="ingredients">
       <h2>Ingredients</h2>
       <div class="ingredient-group">
-        <input placeholder="1 cup tomatoes" type="text" name="ingredients[]name" required>
+        <input placeholder="1 cup flour" type="text" name="ingredients[]name" required>
       </div>
     </div>
-    <button id="add-ingredient-button">Add another ingredient</button>
+    <button class="primary" id="add-ingredient-button">Add another ingredient</button>
     <div id="instructions-group">
       <h2>Instructions</h2>
       <textarea form="recipe-form" name="instructions" id ="instructions-textarea"></textarea>
     </div>
-    <button>Add Recipe</button>
+    <button class="primary">Save Recipe</button>
   </form>
 </div>
 
-<style>
-.ingredient-group { display: flex; margin-bottom: 10px; }
-.ingredient-group input:nth-child(1) { width: 400px; }
-.ingredient-group input:nth-child(2) { margin-left: 10px }
-.ingredient-group button { margin-left: 10px }
-.ingredient-group select { margin-left: 10px; }
-textarea {
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 400px;
-}
-form button { margin-top: 10px; }
-</style>
-
-<script src="https://cdn.quilljs.com/1.3.6/quill.js">
-</script>
 <script>
   (function() {
     let numIngredients = 1;
@@ -74,6 +60,7 @@ form button { margin-top: 10px; }
 
       const removeButton = document.createElement("button");
       removeButton.innerHTML = "Remove";
+      removeButton.setAttribute("class", "secondary");
       removeButton.addEventListener("click", event => {
         event.preventDefault();
         removeIngredient(`ingredient-group-${numIngredients}`);

@@ -1,0 +1,147 @@
+@font-face {
+  font-family: bitter;
+  src: url(Bitter-Regular.ttf);
+}
+
+@font-face {
+  font-family: bitter-bold;
+  src: url(Bitter-Bold.ttf);
+}
+
+@font-face {
+  font-family: open-sans;
+  src: url(OpenSans-Regular.ttf);
+}
+
+
+* { font-family: open-sans; }
+body {
+  background: url("double-bubble-outline.png");
+  margin-top: 0;
+}
+h1 { font-family: bitter-bold; }
+h2 {
+  font-family: bitter;
+  margin-top: 30px;
+ }
+
+input {
+  width: 400px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 30px;
+  border-radius: 5px;
+  box-shadow: none;
+  border-style: solid;
+  border-width: 1px;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+button {
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+button.main {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+button.primary {
+  background-color: #43acd5ed;
+  color: white;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #646161;
+}
+
+button.primary:hover {
+  background: white;
+  color: #646161;
+  border: 1px solid #646161;
+}
+
+button.secondary {
+  height: 25px;
+  background-color: #43acd5ed;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #646161;
+}
+
+button.secondary:hover {
+  background: white;
+  color: #646161;
+  border: 1px solid #646161;
+}
+
+.main-container {
+  max-width: 50%;
+  margin: 0 auto;
+  background-color: #f9f9f9de;
+  padding: 20px;
+  margin-top: 0;
+  -moz-box-shadow:    .5px .5px 10px 2px #ccc;
+  -webkit-box-shadow: .5px .5px 10px 2px #ccc;
+  box-shadow:         .5px .5px 10px 2px #ccc;
+}
+
+.recipe-metadata {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-metadata input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ingredient-group {
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ingredient-group input {
+  margin-right: 10px;
+}
+
+textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 400px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 900px) {
+  .main-container {
+    max-width: 80%;
+  }
+
+  input {
+    max-width: 100%;
+  }
+
+}
+
+@media only screen and (max-width: 650px) {
+  button {
+    width: 100%;
+  }
+}
