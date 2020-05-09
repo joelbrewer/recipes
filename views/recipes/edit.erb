@@ -1,12 +1,14 @@
 <h1><%= @recipe.name %></h1>
 <div>
   <form id="recipe-form" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" value="<%= @recipe.name %>" name="name" required></br>
-    <label for="serving_number">Serves:</label>
-    <input value="<%= @recipe.serving_number %>" type="text" placeholder="10" id="serves" name="serving_number" required></br>
-    <label for="total_time">Total time:</label>
-    <input value="<%= @recipe.total_time %>" type="text" id="total_time" name="total_time"></br>
+    <div class="recipe-metadata">
+      <label for="name">Name:</label>
+      <input type="text" id="name" value="<%= @recipe.name %>" name="name" required></br>
+      <label for="serving_number">Serves:</label>
+      <input value="<%= @recipe.serving_number %>" type="text" placeholder="10" id="serves" name="serving_number" required></br>
+      <label for="total_time">Total time:</label>
+      <input value="<%= @recipe.total_time %>" type="text" id="total_time" name="total_time"></br>
+    </div>
     <div id="ingredients">
       <h2>Ingredients</h2>
       <% @recipe.ingredients.each_with_index do |ingredient, i| %>
@@ -15,12 +17,12 @@
         </div>
       <% end %>
     </div>
-    <button id="add-ingredient-button">Add another ingredient</button>
+    <button class="primary" id="add-ingredient-button">Add another ingredient</button>
     <div id="instructions-group">
       <h2>Instructions</h2>
       <textarea form="recipe-form" name="instructions" id ="instructions-textarea"><%= @recipe.instructions %></textarea>
     </div>
-    <button>Update Recipe</button>
+    <button class="primary">Update Recipe</button>
   </form>
 </div>
 
@@ -44,6 +46,7 @@
         let container = document.getElementById(`ingredient-group-${i}`);
         let removeButton = document.createElement("button");
         removeButton.innerHTML = "Remove";
+        removeButton.setAttribute("class", "secondary");
         removeButton.addEventListener("click", event => {
           event.preventDefault();
           removeIngredient(`ingredient-group-${i}`);
@@ -73,6 +76,7 @@
 
       const removeButton = document.createElement("button");
       removeButton.innerHTML = "Remove";
+      removeButton.setAttribute("class", "secondary");
       removeButton.addEventListener("click", event => {
         event.preventDefault();
         removeIngredient(`ingredient-group-${numIngredients}`);

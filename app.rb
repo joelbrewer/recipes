@@ -53,9 +53,29 @@ class App < Sinatra::Base
     end
   end
 
+  get '/signup' do
+    if params[:userExists]
+      @message = "Email already exists."
+    end
+    erb :"users/new"
+  end
+
+  post '/signup' do
+    user = User.find_by_email params[:email]
+    if user
+      redirect "/signup?userExists=t"
+    else
+      u = User.create(email: params[:email])
+      u.password = params[:password]
+      u.save
+      session[:user_id] = u.id
+    end
+    redirect "/"
+  end
+
   get '/logout' do
     session[:user_id] = nil
-    redirect "/"
+    redirect "/login"
   end
 
   get '/recipes' do
@@ -65,6 +85,12 @@ class App < Sinatra::Base
   get '/recipes/:id/edit', auth: :owner do
     erb :"recipes/edit"
   end
+
+  get '/recipes/:id/delete', auth: :owner do
+    @recipe.destroy!
+    redirect "/"
+  end
+
 
   post '/recipes/:id/edit', auth: :owner do
     params[:user_id] = @user.id
@@ -82,6 +108,8 @@ class App < Sinatra::Base
 
   post '/recipes/new', auth: :user do
     params[:user_id] = @user.id
+    ingredients = params[:ingredients]
+    params.delete(:ingredients)
     r = Recipe.create(params)
     ingredients.each { |i| r.ingredients.create( name: i[:name]) }
     redirect "/recipes/#{r.id}"

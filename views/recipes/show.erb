@@ -1,5 +1,14 @@
+<% if @user && (@user.id == @recipe.user_id) %>
+  <ul>
+    <li><a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a></li>
+    <li><a href="/recipes/<%= @recipe.id %>/delete" onclick="return confirm('Are you sure?')">Delete Recipe</a></li>
+  </ul>
+<% end %>
 <h1><%= @recipe.name %></h1>
-<a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a>
+<ul>
+  <li>Serves: <%= @recipe.serving_number %></li>
+  <li>Total time: <%= @recipe.total_time %></li>
+</ul>
 <h2>Ingredients</h2>
 <ul>
 <% @recipe.ingredients.each do |i| %>
@@ -7,7 +16,7 @@
 <% end %>
 </ul>
 
-<h2>Instructions</h2>
+<h2 id="instructions-header">Instructions</h2>
 <div style="white-space: pre-line;">
   <%= @recipe.instructions %>
 </div>

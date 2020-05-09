@@ -17,7 +17,7 @@
 * { font-family: open-sans; }
 body {
   background: url("double-bubble-outline.png");
-  margin-top: 0;
+  margin: 0;
 }
 h1 { font-family: bitter-bold; }
 h2 {
@@ -95,7 +95,7 @@ button.secondary:hover {
   margin: 0 auto;
   background-color: #f9f9f9de;
   padding: 20px;
-  margin-top: 0;
+  margin-top: 15px;
   -moz-box-shadow:    .5px .5px 10px 2px #ccc;
   -webkit-box-shadow: .5px .5px 10px 2px #ccc;
   box-shadow:         .5px .5px 10px 2px #ccc;
@@ -111,6 +111,26 @@ button.secondary:hover {
   margin-bottom: 5px;
 }
 
+#login-header {
+  text-align: center;
+}
+
+#login-button {
+  margin-top: 10px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.login-form input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .ingredient-group {
   display: flex;
   margin-bottom: 10px;
@@ -122,11 +142,52 @@ button.secondary:hover {
   margin-right: 10px;
 }
 
+#instructions-header {
+  margin-bottom: 0;
+}
+
 textarea {
   min-width: 100%;
   max-width: 100%;
   min-height: 400px;
   margin-bottom: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+nav li {
+  float: left;
+  border-right:1px solid #bbb;
+}
+
+nav li:last-child {
+  border-right: none;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover:not(.active) {
+  background-color: #111;
+}
+
+nav .active {
+  background-color: #4CAF50;
+}
+
+.error-msg {
+  text-align: center;
 }
 
 @media only screen and (max-width: 900px) {
