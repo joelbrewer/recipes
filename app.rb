@@ -21,9 +21,11 @@ class App < Sinatra::Base
       @user != nil
     end
 
-    def is_owner?
+    def is_owner_or_admin?
       @recipe = Recipe.find(params[:id])
-      (@user != nil) && (@user.id == @recipe.user_id)
+      (@user != nil) &&
+      (@user.id == @recipe.user_id) ||
+       @user.admin?
     end
   end
 
@@ -82,17 +84,17 @@ class App < Sinatra::Base
     redirect "/"
   end
 
-  get '/recipes/:id/edit', auth: :owner do
+  get '/recipes/:id/edit', auth: :owner_or_admin do
     erb :"recipes/edit"
   end
 
-  get '/recipes/:id/delete', auth: :owner do
+  get '/recipes/:id/delete', auth: :owner_or_admin do
     @recipe.destroy!
     redirect "/"
   end
 
 
-  post '/recipes/:id/edit', auth: :owner do
+  post '/recipes/:id/edit', auth: :owner_or_admin do
     params[:user_id] = @user.id
     ingredients = params[:ingredients]
     params.delete(:ingredients)

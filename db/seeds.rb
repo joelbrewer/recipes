@@ -7,6 +7,7 @@ users = ['joel@brewerdigital.com', 'tanyabrewer01@gmail.com']
 users.each do |u|
   new_user = User.create(email: u)
   new_user.password = ENV["DEFAULT_PASSWORD"]
+  new_user.is_admin = true
   new_user.save
 end
 
