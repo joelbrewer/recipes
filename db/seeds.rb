@@ -2,7 +2,7 @@ User.destroy_all
 Recipe.destroy_all
 Ingredient.destroy_all
 
-users = ['joel@brewerdigital.com', 'tanyabrewer01@gmail.com']
+users = ['joel@brewerdigital.com']
 
 users.each do |u|
   new_user = User.create(email: u)
