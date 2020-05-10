@@ -34,7 +34,7 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    @recipes = Recipe.all
+    @recipes = Recipe.order("lower(name)").all
     erb :index
   end
 
