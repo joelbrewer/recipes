@@ -4,8 +4,15 @@ ruby '2.7.5'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'sinatra-contrib'
-gem 'sqlite3'
 gem 'rake'
-gem 'pg'
-gem 'byebug'
 gem 'bcrypt'
+
+group :test, :development do
+  gem 'byebug'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
+end
+
