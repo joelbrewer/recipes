@@ -3,7 +3,6 @@ require 'sinatra/activerecord'
 require 'sinatra/reloader'
 require 'sinatra/base'
 require './models'
-require 'byebug'
 
 class App < Sinatra::Base
   set sessions: true
