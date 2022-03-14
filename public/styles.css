@@ -153,6 +153,11 @@ textarea {
   margin-bottom: 10px;
 }
 
+textarea.meal-plan {
+  height: 50px;
+  min-height: 50px;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;

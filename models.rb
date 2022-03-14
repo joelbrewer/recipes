@@ -25,3 +25,7 @@ end
 class Instruction < ActiveRecord::Base
   belongs_to :recipe
 end
+
+class MealPlan < ActiveRecord::Base
+  belongs_to :user
+end

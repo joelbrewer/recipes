@@ -120,4 +120,17 @@ class App < Sinatra::Base
     @recipe = Recipe.find(params[:id])
     erb :"recipes/show"
   end
+
+  get '/meal_plans/edit', auth: :user do
+    @meal_plan = MealPlan.find_or_create_by(user_id: @user.id)
+    @recipes = Recipe.order("lower(name)").all
+    @days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+    erb :"meal_plans/edit"
+  end
+
+  post '/meal_plans/edit', auth: :user do
+    @meal_plan = MealPlan.find_or_create_by(user_id: @user.id)
+    @meal_plan.update(params)
+    redirect "/meal_plans/edit"
+  end
 end

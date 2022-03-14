@@ -1,0 +1,27 @@
+<div>
+  <h1>Meal Plan</h1>
+  <form id="meal-plan-form" method="post">
+    <% @days.each do |d| %>
+      <h2><%= d.capitalize %><h2>
+      <label for="<%= d %>_lunch_recipe_id">Lunch</label>
+      <select name="<%= d %>_lunch_recipe_id">
+        <% @recipes.each do |r| %>
+          <option
+            <% if r.id == @meal_plan.send("#{d}_lunch_recipe_id") %>
+              <%= "selected=selected" %>
+            <% end %>
+            value="<%= r.id %>"><%= r.name %>
+          </option>
+        <% end %>
+      </select>
+      <label for="<%= d %>_dinner_recipe_id">Dinner</label>
+      <select name="<%= d %>_dinner_recipe_id">
+        <% @recipes.each do |r| %>
+          <option value="<%= r.id %>"><%= r.name %></option>
+        <% end %>
+      </select>
+      <textarea form="meal-plan-form" name="<%= d %>_notes" id="<%= d %>_notes" class="meal-plan"><%= @meal_plan.send("#{d}_notes") %></textarea>
+      <% end%>
+    <button class="primary">Save Meal Plan</button>
+  </form>
+</div>
